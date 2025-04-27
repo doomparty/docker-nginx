@@ -10,7 +10,7 @@ jobs:
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      DOCKERHUB_REPOSITORY: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest
+      DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
 
     steps:
       - name: Set up QEMU
@@ -27,4 +27,4 @@ jobs:
         with:
           push: true
           platforms: linux/amd64
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}
+          tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest
