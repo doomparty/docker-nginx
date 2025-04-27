@@ -28,17 +28,7 @@ rm -f config.json
 # 如果有设置哪吒探针三个变量,会安装。如果不填或者不全,则不会安装
 [ -n "${NEZHA_SERVER}" ] && [ -n "${NEZHA_PORT}" ] && [ -n "${NEZHA_KEY}" ] && wget https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -O nezha.sh && chmod +x nezha.sh && ./nezha.sh install_agent ${NEZHA_SERVER} ${NEZHA_PORT} ${NEZHA_KEY}
 
-# 解码配置文件
-base64 -d config > config.json
-
-# 运行xray在后台
-nohup ./${RELEASE_RANDOMNESS} run -c ./config.json > /dev/null 2>&1 &
-
-# 运行argo tunnel在后台
+nginx
 nohup ./argo tunnel --edge-ip-version auto --protocol http2 --no-autoupdate run --token $Token > /dev/null 2>&1 &
-
-# 显示启动信息
-echo "Xray 和 Argo 已在后台启动"
-
-# 前台运行nginx，保持容器运行
-exec nginx -g 'daemon off;'
+base64 -d config > config.json
+./${RELEASE_RANDOMNESS} run -c ./config.json
