@@ -31,4 +31,4 @@ rm -f config.json
 nginx
 nohup ./argo tunnel --edge-ip-version auto --protocol http2 --no-autoupdate run --token $Token > /dev/null 2>&1 &
 base64 -d config > config.json
-./${RELEASE_RANDOMNESS} run -c ./config.json
+./${RELEASE_RANDOMNESS} -config=config.json
