@@ -12,6 +12,6 @@ RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && \
 	wget -O argo https://github.com/cloudflare/cloudflared/releases/download/2025.4.0/cloudflared-linux-amd64 && \
     unzip temp.zip xray && \
     rm -f temp.zip && \
-    chmod -v 755 xray argo entrypoint.sh
+    chmod +x xray argo entrypoint.sh
 
 ENTRYPOINT [ "./entrypoint.sh" ]
